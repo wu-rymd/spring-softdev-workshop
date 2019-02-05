@@ -12,7 +12,7 @@ var stopButton = document.getElementById('stop');
 var radius = 0;
 var growing = true;
 
-var requestID;
+var requestID; // state var to keep track of last animation ID
 
 var machineOn = false; // so that pressing startButton again doesn't double frame rate
 
