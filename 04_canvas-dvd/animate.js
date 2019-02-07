@@ -15,7 +15,8 @@ var growing = true;
 
 var requestID; // state var to keep track of last animation ID
 
-var machineOn = false; // so that pressing circleButton again doesn't double frame rate
+var machine = "off"; // so that pressing button again doesn't double frame rate
+// ['off', 'circle', 'dvd']
 
 // helper function for drawEllipse function
 var clear = () => {
@@ -98,44 +99,47 @@ var setupDVD = () => {
 
 }
 
+var stopAnimation = (e) => {
+    if (machine == "off") { // do not register click if not running
+        e.preventDefault();
+        console.log( "--> MACHINE ALREADY OFF!" );
+    }
+
+    else { // stop if machine on
+        machine = "off";
+        window.cancelAnimationFrame( requestID ); // stop animation using current request ID
+        console.log( "--> STOP ANIMATION @ REQUEST ID " + requestID );
+    }
+}
+
 // clicking circleButton when machine off starts the machine
 circleButton.addEventListener( "click", function(e) {
     
-    if (machineOn) {
-        e.preventDefault() // do not register click if already running
+    if (machine == "circle") {
+        e.preventDefault(); // do not register click if already running
         console.log( "--> MACHINE ALREADY ON!" );
     }
     
-    else { // start if machine off
-        machineOn = true;
+    else { // switch if not already circle
+        stopAnimation(e); // stop prev animation
+        machine = "circle";
         requestID = window.requestAnimationFrame( drawFrameCircle );
     }
 });
 
 dvdButton.addEventListener( "click", function(e) {
 
-    if (machineOn) {
-        e.preventDefault() // do not register click if already running
+    if (machine == "dvd") {
+        e.preventDefault(); // do not register click if already running
         console.log( "--> MACHINE ALREADY ON!" );
     }
     
-    else { // start if machine off
-        machineOn = true;
+    else { // switch if not already dvd
+        stopAnimation(e); // stop prev animation
+        machine = "dvd";
         setupDVD();
     }
 });
 
 // clicking stopButton when machine on stops the machine
-stopButton.addEventListener( "click", function(e) {
-
-    if (!machineOn) {
-        e.preventDefault() // do not register click if not running
-        console.log( "--> MACHINE ALREADY OFF!" );
-    }
-
-    else { // stop if machine on
-        machineOn = false;
-        window.cancelAnimationFrame( requestID ); // stop animation using current request ID
-        console.log( "--> STOP ANIMATION @ REQUEST ID " + requestID );
-    }
-});
+stopButton.addEventListener( "click", stopAnimation );
