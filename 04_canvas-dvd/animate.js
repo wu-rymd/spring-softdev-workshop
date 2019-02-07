@@ -1,12 +1,12 @@
 // Team RayJay (Jeffrey Wu, Raymond Wu)
 // SoftDev2 pd7
-// K03 -- They lock us in the tower whenever we get caught ...which is often
-// 2019-02-06
+// K04 -- What is it saving the screen from?
+// 2019-02-07
 
 var canvas = document.getElementById("playground");
 var ctx = canvas.getContext("2d");
 
-var startButton = document.getElementById('circle');
+var circleButton = document.getElementById('circle');
 var stopButton = document.getElementById('stop');
 var dvdButton = document.getElementById('dvd');
 
@@ -15,7 +15,7 @@ var growing = true;
 
 var requestID; // state var to keep track of last animation ID
 
-var machineOn = false; // so that pressing startButton again doesn't double frame rate
+var machineOn = false; // so that pressing circleButton again doesn't double frame rate
 
 // helper function for drawEllipse function
 var clear = () => {
@@ -27,7 +27,6 @@ var clear = () => {
 // helper function for drawFrameCircle function
 var drawEllipse = (radius) => {
     clear(); // clear canvas
-
     console.log("drawing ellipse w/ radius " + radius);
     
     ctx.beginPath(); // start ellipse path
@@ -67,6 +66,9 @@ var setupDVD = () => {
     
     var xVel = 1;
     var yVel = 1;
+
+    var logo = new Image();
+    logo.src = "logo_dvd.jpg";
     
     var drawFrameDVD = () => {
 
@@ -78,12 +80,15 @@ var setupDVD = () => {
         xCoordinate -= xVel;
         yCoordinate -= yVel;
 
+        // if hit left or right borders
         if (xCoordinate <= 0 || xCoordinate+rectWidth >= canvas.width)
             xVel *= -1;
+        // if hit upper or lower borders
         if (yCoordinate <= 0 || yCoordinate+rectHeight >= canvas.height)
             yVel *= -1;
         
-        ctx.fillRect( xCoordinate , yCoordinate , rectWidth , rectHeight ) ;
+        ctx.drawImage( logo, xCoordinate , yCoordinate , rectWidth , rectHeight ) ;
+        // uses width and height from rectangle
         
         requestID = window.requestAnimationFrame( drawFrameDVD ); // do it, then bind to state var
         
@@ -93,8 +98,8 @@ var setupDVD = () => {
 
 }
 
-// clicking startButton when machine off starts the machine
-startButton.addEventListener( "click", function(e) {
+// clicking circleButton when machine off starts the machine
+circleButton.addEventListener( "click", function(e) {
     
     if (machineOn) {
         e.preventDefault() // do not register click if already running
@@ -104,6 +109,19 @@ startButton.addEventListener( "click", function(e) {
     else { // start if machine off
         machineOn = true;
         requestID = window.requestAnimationFrame( drawFrameCircle );
+    }
+});
+
+dvdButton.addEventListener( "click", function(e) {
+
+    if (machineOn) {
+        e.preventDefault() // do not register click if already running
+        console.log( "--> MACHINE ALREADY ON!" );
+    }
+    
+    else { // start if machine off
+        machineOn = true;
+        setupDVD();
     }
 });
 
@@ -120,8 +138,4 @@ stopButton.addEventListener( "click", function(e) {
         window.cancelAnimationFrame( requestID ); // stop animation using current request ID
         console.log( "--> STOP ANIMATION @ REQUEST ID " + requestID );
     }
-});
-
-dvdButton.addEventListener( "click", function(e) {
-    setupDVD();
 });
