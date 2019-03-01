@@ -129,16 +129,10 @@ circleButton.addEventListener( "click", function(e) {
 
 dvdButton.addEventListener( "click", function(e) {
 
-    if (machine == "dvd") {
-        e.preventDefault(); // do not register click if already running
-        console.log( "--> MACHINE ALREADY ON!" );
-    }
-    
-    else { // switch if not already dvd
-        stopAnimation(e); // stop prev animation
-        machine = "dvd";
-        setupDVD();
-    }
+    stopAnimation(e); // stop prev animation
+    machine = "dvd";
+    setupDVD();
+
 });
 
 // clicking stopButton when machine on stops the machine
