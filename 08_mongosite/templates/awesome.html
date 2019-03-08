@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='nice.css') }}">
+</head>
+<body>
+
+{% block response %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if flash %}
+            {% for k, message in messages %}
+                <div class={{category}}>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+{% endblock %}
+<h1><a href="/">HOME</a></h1>
+{% block body %}
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% extends "awesome.html" %}
+{% block body %}
+{%if pointed %}
+<h1><a href="/search">SEARCH</a></h1>
+{% endif %}
+<form action="/auth" method="POST">
+    IP of Droplet:<br>
+    <input type="text" name="droplet" placeholder = "jayy.mooo.com"> <br>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "awesome.html" %}
+{% block body %}
+<h1><a href="/search">SEARCH</a></h1>
+<form action="/doit" method="POST">
+    <!--# POSSIBLE ARGS: num, name, type, height, weight , weaknesses, evolutions-->
+    Search for pokemon:<br>
+    <input type="text" name="num" placeholder = "001"> <br>
+    <input type="text" name="name" placeholder = "Bulbasaur"> <br>
+    <input type="text" name="type" placeholder = "Grass"> <br>
+    <input type="text" name="height" placeholder = "0.71 m"> <br>
+    <input type="text" name="weight" placeholder = "6.9 kg"> <br>
+    <input type="text" name="weaknesses" placeholder = "Fire"> <br>
+    <input type="text" name="evolutions" placeholder = "Ivysaur"> <br>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
