@@ -23,7 +23,7 @@ var drawCircle = (x, y) => {
     c.setAttribute("stroke", "black");
     
     c.addEventListener("click", function(e) {
-        e.stopPropagation(); // do not do outer function
+        e.stopPropagation(); // "prevents further propagation of the current event" -MDN (just do this)
         if (c.getAttribute("fill") == "purple")
             c.setAttribute("fill", "gold");
         else {
