@@ -30,7 +30,7 @@
       var data = [4, 8, 15, 16, 23, 42];
       // Select chart
       var chart = d3.select(".chart");
-      // Select the <div>s in the chart
+      // Select the <div>s in the chart / "declaring the elements you want to exist" (bost.ocks.org)
       var bar = chart.selectAll("div"); // NodeList of length 0 ... bc no bars!!
       // Create an element (in .chart) for each data point in data, prepare to set element's __data__ attribute to data value
       var barUpdate = bar.data(data);
