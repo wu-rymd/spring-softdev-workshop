@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .chart div {
+          font: 10px sans-serif;
+          background-color: steelblue;
+          text-align: right;
+          padding: 3px;
+          margin: 1px;
+          color: white;
+      }
+    </style>
+  </head>
+  
+  <body>
+    
+    <div class="chart">
+      <!-- <div style="width: 40px;">4</div> -->
+      <!-- <div style="width: 80px;">8</div> -->
+      <!-- <div style="width: 150px;">15</div> -->
+      <!-- <div style="width: 160px;">16</div> -->
+      <!-- <div style="width: 230px;">23</div> -->
+      <!-- <div style="width: 420px;">42</div> -->
+    </div>
+
+    <script src="http://d3js.org/d3.v5.min.js" charset="utf-8"> </script>
+    <script>
+      // Bar graph data
+      var data = [4, 8, 15, 16, 23, 42];
+      // Select chart
+      var chart = d3.select(".chart");
+      // Select the <div>s in the chart
+      var bar = chart.selectAll("div"); // NodeList of length 0 ... bc no bars!!
+      // Create an element (in .chart) for each data point in data, prepare to set element's __data__ attribute to data value
+      var barUpdate = bar.data(data);
+      // ENTER/add the data to the elements, then APPEND to .chart as <div>s
+      var barEnter = barUpdate.enter().append("div"); // Array of 6 <div>s
+      // Set width of each bar proportional to data value
+      barEnter.style("width", function(OtherWeirdArg) { return OtherWeirdArg * 10 + "px"; });
+      // Add labels
+      barEnter.text( function(myWeirdArgThatReflectsData) { return myWeirdArgThatReflectsData; } );
+
+      // barEnter contains array of 6 <div>s as created
+      // .style() and .text() will apply to all <div>s
+      // can input function as arg of .style() and .text()
+      //    function arg can have arg that reflects __data__
+    </script>
+  </body>
+</html>
