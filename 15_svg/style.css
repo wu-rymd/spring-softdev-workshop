@@ -1,0 +1,11 @@
+svg {
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    width: 500px;
+    height: 500px;
+}
+
+svg circle {
+    fill: red;
+    fill-opacity: .25;
+}
