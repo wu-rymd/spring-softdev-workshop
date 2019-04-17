@@ -27,7 +27,7 @@ print("====================")
 # look thru elem of one list
 # if elem in both lists, add to final list
 def intersection(A,B):
-    return [x for x in A if x in A and x in B]
+    return [x for x in A if x in B]
 
 print(intersection(listA,listB)) # [2, 3]
 print(intersection(listC,listD)) # [34]
