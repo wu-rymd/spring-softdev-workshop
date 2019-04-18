@@ -4,7 +4,15 @@
 # 2019-04-15
 
 n=100
-pyth_triples = [(x,y,z) for x in range(1,n) for y in range(x,n) for z in range(y,n) if z*z == x*x + y*y]
+pyth_triples = [(x,y,z)
+                for x in range(1,n)
+                for y in range(x,n)
+                for z in range(y,n)
+                if z*z == x*x + y*y]
+
+#floating point arithmetic is not accurate!
+#also sqrt is an approximation... TI-calc left&right bound... computationally expensive!! slower!!
+#costs an import statement
 
 print(pyth_triples)
 
