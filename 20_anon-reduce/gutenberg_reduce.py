@@ -22,7 +22,7 @@ def frequency(word):
 
 def freq_group(string):
     phrase = string.split() #['he', 'said']
-    frequencies = [ 1 for x in range( len(content) - len(phrase) ) if phrase == content[x:x+len(phrase)] ]
+    frequencies = [ 1 for x in range( len(content) - len(phrase) ) if phrase == content[x:x+len(phrase)] ] #...sliding window
     return reduce( (lambda x,y : x+y), frequencies )
      
     
