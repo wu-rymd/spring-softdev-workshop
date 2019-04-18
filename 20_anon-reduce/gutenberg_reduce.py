@@ -26,7 +26,7 @@ def most_frequent():
         if word in frequencies.keys(): continue
         frequencies[word] = frequency(word) #... which uses reduce
     maxfreq = max(frequencies.values())
-    return [x for x in frequencies.keys() if frequencies[x] == maxfreq] #... list comp
+    return [x for x in frequencies.keys() if frequencies[x] == maxfreq] #... list comp... in case tie!
 
 
 print( "FREQUENCY OF 'the':", frequency("the") ) #... 3452
