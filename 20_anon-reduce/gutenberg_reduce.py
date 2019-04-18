@@ -16,9 +16,15 @@ def frequency(word):
     matches = [1 for x in content if x == word] #... list comp
     return reduce((lambda x, y: x+y), matches) #... reduce
 
-def freq_group(wordlist):
-    frequencies = [ frequency(word) for word in wordlist ] #... list comp
-    return reduce( (lambda x, y: x+y), frequencies ) #... reduce
+# def freq_group(wordlist):
+#     frequencies = [ frequency(word) for word in wordlist ] #... list comp
+#     return reduce( (lambda x, y: x+y), frequencies ) #... reduce
+
+def freq_group(string):
+    phrase = string.split() #['he', 'said']
+    frequencies = [ 1 for x in range( len(content) - len(phrase) ) if phrase == content[x:x+len(phrase)] ]
+    return reduce( (lambda x,y : x+y), frequencies )
+     
     
 def most_frequent():
     frequencies = {}
@@ -32,6 +38,13 @@ def most_frequent():
 print( "FREQUENCY OF 'the':", frequency("the") ) #... 3452
 print( "FREQUENCY OF 'Gutenberg':", frequency("Gutenberg") ) #... 20
 
-print( "FREQUENCY OF ['the', 'Gutenberg']:", freq_group(['the', 'Gutenberg']) ) #... should be 3472
+print( "=========================" )
+
+# print( "FREQUENCY OF ['the', 'Gutenberg']:", freq_group(['the', 'Gutenberg']) ) #... should be 3472
+print( "FREQUENCY OF 'he said':", freq_group("he said") )
+print( "FREQUENCY OF 'he said.':", freq_group("he said.") )
+print( "FREQUENCY OF 'she said.':", freq_group("she said.") )
+
+print( "=========================" )
 
 print( "MOST FREQUENT WORD(S):", most_frequent() ) #... ['the']
