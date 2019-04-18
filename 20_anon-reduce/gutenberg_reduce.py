@@ -6,7 +6,8 @@
 from functools import reduce
 
 # *** USE 'book_sample.txt' TO TEST ON SMALLER SAMPLE!! ***
-with open('book.txt','r') as f:
+# *** USE 'book.txt' TO TEST ON ENTIRE BOOK!! ***
+with open('book_sample.txt','r') as f:
     content = f.read().split()
 
 
@@ -14,6 +15,7 @@ with open('book.txt','r') as f:
 
 def frequency(word):
     matches = [1 for x in content if x == word] #... list comp
+    if matches == []: return 0
     return reduce((lambda x, y: x+y), matches) #... reduce
 
 # def freq_group(wordlist):
@@ -23,6 +25,7 @@ def frequency(word):
 def freq_group(string):
     phrase = string.split() #['he', 'said']
     frequencies = [ 1 for x in range( len(content) - len(phrase) ) if phrase == content[x:x+len(phrase)] ] #...sliding window
+    if frequencies == []: return 0
     return reduce( (lambda x,y : x+y), frequencies )
      
     
