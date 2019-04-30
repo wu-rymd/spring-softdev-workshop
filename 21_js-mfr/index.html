@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <title>Data points using .map(), .filter(), and .reduce()</title>
+    <style>
+      * > pre {
+          display: inline;
+          color: maroon;
+      }
+      .block {
+          font-size: 75%;
+          color: blue;
+          display: block;
+          padding-left: 15px;
+      }
+      aside {
+          float: right;
+          background-color: #FFFF33;
+          padding: 20px;
+          border-radius: 5px;
+          max-width: 25vw;
+          margin-left: 15px;
+          margin-bottom: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <aside>
+      Open the Console to see the results in detail...
+    </aside>
+    
+    <h3>Data points using <pre>.map()</pre>, <pre>.filter()</pre>, and <pre>.reduce()</pre>&nbsp;&mdash;&nbsp;Raymond Wu</h3>
+
+    <br>
+    
+    <p>First, narrow the dataset down to only those regarding the 2010-2011 school year:</p>
+    <pre>
+      var thisYearOnly = json.filter( function(n) {return n['schoolyear'] == 20102011} );
+    </pre>
+    <p><em>From this point forward, all data points are accurate only for the 2010-2011 school year.</em></p>
+
+    <br><br>
+
+    <p>Then, get the list of schools where the total enrollment is greater than 2500.</p>
+    <pre>
+      var over2500 = thisYearOnly.filter( function(n) {return n['total_enrollment'] > 2500} );
+      console.log(over2500);
+    </pre>
+    <pre class="block">
+      0: {DBN: "02M475", Name: "STUYVESANT HIGH SCHOOL", schoolyear: 20102011, frl_percent: 41.3, total_enrollment: 3287, …}
+      1: {DBN: "03M485", Name: "FIORELLO H. LAGUARDIA HIGH SCHOOL OF MUSIC & ART", schoolyear: 20102011, frl_percent: 26.9, total_enrollment: 2545, …}
+      2: {DBN: "08X405", Name: "HERBERT LEHMAN HIGH SCHOOL", schoolyear: 20102011, frl_percent: 80.7, total_enrollment: 3925, …}
+      3: {DBN: "10X440", Name: "DEWITT CLINTON HIGH SCHOOL", schoolyear: 20102011, frl_percent: 85.2, total_enrollment: 4408, …}
+      4: {DBN: "10X445", Name: "BRONX HIGH SCHOOL OF SCIENCE", schoolyear: 20102011, frl_percent: 31.6, total_enrollment: 3017, …}
+      5: {DBN: "13K430", Name: "BROOKLYN TECHNICAL HIGH SCHOOL", schoolyear: 20102011, frl_percent: 64.3, total_enrollment: 5140, …}
+      6: {DBN: "20K445", Name: "NEW UTRECHT HIGH SCHOOL", schoolyear: 20102011, frl_percent: 53.6, total_enrollment: 3218, …}
+      7: {DBN: "20K490", Name: "FORT HAMILTON HIGH SCHOOL", schoolyear: 20102011, frl_percent: 48.5, total_enrollment: 4353, …}
+      8: {DBN: "20K505", Name: "FRANKLIN DELANO ROOSEVELT HIGH SCHOOL", schoolyear: 20102011, frl_percent: 74.2, total_enrollment: 3412, …}
+      9: {DBN: "21K410", Name: "ABRAHAM LINCOLN HIGH SCHOOL", schoolyear: 20102011, frl_percent: 55.9, total_enrollment: 2617, …}
+      10: {DBN: "21K525", Name: "EDWARD R. MURROW HIGH SCHOOL", schoolyear: 20102011, frl_percent: 19.6, total_enrollment: 4019, …}
+      11: {DBN: "21K540", Name: "JOHN DEWEY HIGH SCHOOL", schoolyear: 20102011, frl_percent: 55.9, total_enrollment: 2613, …}
+      12: {DBN: "22K405", Name: "MIDWOOD HIGH SCHOOL", schoolyear: 20102011, frl_percent: 31.7, total_enrollment: 3986, …}
+      13: {DBN: "22K425", Name: "JAMES MADISON HIGH SCHOOL", schoolyear: 20102011, frl_percent: 52, total_enrollment: 3145, …}
+      14: {DBN: "24Q455", Name: "NEWTOWN HIGH SCHOOL", schoolyear: 20102011, frl_percent: 53.7, total_enrollment: 2908, …}
+      15: {DBN: "25Q425", Name: "JOHN BOWNE HIGH SCHOOL", schoolyear: 20102011, frl_percent: 69.4, total_enrollment: 3471, …}
+      16: {DBN: "25Q460", Name: "FLUSHING HIGH SCHOOL", schoolyear: 20102011, frl_percent: 75.7, total_enrollment: 3041, …}
+      17: {DBN: "26Q415", Name: "BENJAMIN N. CARDOZO HIGH SCHOOL", schoolyear: 20102011, frl_percent: 35.5, total_enrollment: 4063, …}
+      18: {DBN: "26Q430", Name: "FRANCIS LEWIS HIGH SCHOOL", schoolyear: 20102011, frl_percent: 57.4, total_enrollment: 4211, …}
+      19: {DBN: "26Q435", Name: "MARTIN VAN BUREN HIGH SCHOOL", schoolyear: 20102011, frl_percent: 48.3, total_enrollment: 2542, …}
+      20: {DBN: "26Q495", Name: "BAYSIDE HIGH SCHOOL", schoolyear: 20102011, frl_percent: 61.5, total_enrollment: 3628, …}
+      21: {DBN: "27Q475", Name: "RICHMOND HILL HIGH SCHOOL", schoolyear: 20102011, frl_percent: 65.2, total_enrollment: 2910, …}
+      22: {DBN: "27Q480", Name: "JOHN ADAMS HIGH SCHOOL", schoolyear: 20102011, frl_percent: 82.6, total_enrollment: 3296, …}
+      23: {DBN: "28Q440", Name: "FOREST HILLS HIGH SCHOOL", schoolyear: 20102011, frl_percent: 50.7, total_enrollment: 3897, …}
+      24: {DBN: "28Q505", Name: "HILLCREST HIGH SCHOOL", schoolyear: 20102011, frl_percent: 76.4, total_enrollment: 3289, …}
+      25: {DBN: "30Q445", Name: "WILLIAM CULLEN BRYANT HIGH SCHOOL", schoolyear: 20102011, frl_percent: 30.1, total_enrollment: 3010, …}
+      26: {DBN: "30Q450", Name: "LONG ISLAND CITY HIGH SCHOOL", schoolyear: 20102011, frl_percent: 72.1, total_enrollment: 3508, …}
+      27: {DBN: "31R450", Name: "CURTIS HIGH SCHOOL", schoolyear: 20102011, frl_percent: 59.5, total_enrollment: 2565, …}
+      28: {DBN: "31R455", Name: "TOTTENVILLE HIGH SCHOOL", schoolyear: 20102011, frl_percent: 18.5, total_enrollment: 3813, …}
+      29: {DBN: "31R460", Name: "SUSAN E. WAGNER HIGH SCHOOL", schoolyear: 20102011, frl_percent: 48.4, total_enrollment: 3162, …}
+      length: 30
+      __proto__: Array(0)
+    </pre>
+
+    <br><br>
+    
+    <p>Then, get a list of only the names and total enrollments of each school (in a sublist) that has total enrollment greater than 2500.</p>
+    <pre>
+      var over2500_names = over2500.map( function(n) {return [n['Name'], n['total_enrollment']]} );
+      console.log(over2500_names);
+    </pre>
+    <pre class="block">
+      0: (2) ["STUYVESANT HIGH SCHOOL", 3287]
+      1: (2) ["FIORELLO H. LAGUARDIA HIGH SCHOOL OF MUSIC & ART", 2545]
+      2: (2) ["HERBERT LEHMAN HIGH SCHOOL", 3925]
+      3: (2) ["DEWITT CLINTON HIGH SCHOOL", 4408]
+      4: (2) ["BRONX HIGH SCHOOL OF SCIENCE", 3017]
+      5: (2) ["BROOKLYN TECHNICAL HIGH SCHOOL", 5140]
+      6: (2) ["NEW UTRECHT HIGH SCHOOL", 3218]
+      7: (2) ["FORT HAMILTON HIGH SCHOOL", 4353]
+      8: (2) ["FRANKLIN DELANO ROOSEVELT HIGH SCHOOL", 3412]
+      9: (2) ["ABRAHAM LINCOLN HIGH SCHOOL", 2617]
+      10: (2) ["EDWARD R. MURROW HIGH SCHOOL", 4019]
+      11: (2) ["JOHN DEWEY HIGH SCHOOL", 2613]
+      12: (2) ["MIDWOOD HIGH SCHOOL", 3986]
+      13: (2) ["JAMES MADISON HIGH SCHOOL", 3145]
+      14: (2) ["NEWTOWN HIGH SCHOOL", 2908]
+      15: (2) ["JOHN BOWNE HIGH SCHOOL", 3471]
+      16: (2) ["FLUSHING HIGH SCHOOL", 3041]
+      17: (2) ["BENJAMIN N. CARDOZO HIGH SCHOOL", 4063]
+      18: (2) ["FRANCIS LEWIS HIGH SCHOOL", 4211]
+      19: (2) ["MARTIN VAN BUREN HIGH SCHOOL", 2542]
+      20: (2) ["BAYSIDE HIGH SCHOOL", 3628]
+      21: (2) ["RICHMOND HILL HIGH SCHOOL", 2910]
+      22: (2) ["JOHN ADAMS HIGH SCHOOL", 3296]
+      23: (2) ["FOREST HILLS HIGH SCHOOL", 3897]
+      24: (2) ["HILLCREST HIGH SCHOOL", 3289]
+      25: (2) ["WILLIAM CULLEN BRYANT HIGH SCHOOL", 3010]
+      26: (2) ["LONG ISLAND CITY HIGH SCHOOL", 3508]
+      27: (2) ["CURTIS HIGH SCHOOL", 2565]
+      28: (2) ["TOTTENVILLE HIGH SCHOOL", 3813]
+      29: (2) ["SUSAN E. WAGNER HIGH SCHOOL", 3162]
+      length: 30
+      __proto__: Array(0)
+    </pre>
+
+    <br><br>
+
+    <p>
+      Then, get the total amount of students in the NYCDOE system for the 2010-2011 school year.
+      <ul>
+        <li>Get a list of the the total enrollment in each school.</li>
+        <li>Use <pre>.reduce()</pre> to find the sum of said list.</li>
+      </ul>
+    </p>
+    <pre>
+      var listOfEnrollments = thisYearOnly.map( function(n) {return n['total_enrollment']} );
+      var totalStudents = listOfEnrollments.reduce( function(a,b) {return a+b} );
+      console.log(totalStudents);
+    </pre>
+    <pre class="block">
+      973766
+    </pre>
+
+    <br><br>
+    
+    <p>
+      Then, get the list of schools where the Asian population is greater than 70%.
+    </p>
+    <pre>
+      var asianDomination = thisYearOnly.filter( function(n) {return n['asian_per'] > 70} );
+      console.log(asianDomination);
+    </pre>
+    <pre class="block">
+      0: {DBN: "01M184", Name: "PS 184M SHUANG WEN", schoolyear: 20102011, frl_percent: 75.4, total_enrollment: 685, …}
+      1: {DBN: "01M515", Name: "LOWER EAST SIDE PREPARATORY HIGH SCHOOL", schoolyear: 20102011, frl_percent: 95.5, total_enrollment: 573, …}
+      2: {DBN: "02M002", Name: "PS 002 MEYER LONDON", schoolyear: 20102011, frl_percent: 95.9, total_enrollment: 832, …}
+      3: {DBN: "02M042", Name: "PS 042 BENJAMIN ALTMAN", schoolyear: 20102011, frl_percent: 94.3, total_enrollment: 810, …}
+      4: {DBN: "02M124", Name: "PS 124 YUNG WING", schoolyear: 20102011, frl_percent: 81.1, total_enrollment: 926, …}
+      5: {DBN: "02M130", Name: "PS 130 HERNANDO DESOTO", schoolyear: 20102011, frl_percent: 82, total_enrollment: 1022, …}
+      6: {DBN: "02M131", Name: "I S 131", schoolyear: 20102011, frl_percent: 95.7, total_enrollment: 703, …}
+      7: {DBN: "02M475", Name: "STUYVESANT HIGH SCHOOL", schoolyear: 20102011, frl_percent: 41.3, total_enrollment: 3287, …}
+      8: {DBN: "02M545", Name: "HIGH SCHOOL FOR DUAL LANGUAGE & ASIAN STUDIES", schoolyear: 20102011, frl_percent: 91.3, total_enrollment: 339, …}
+      9: {DBN: "20K069", Name: "PS 69", schoolyear: 20102011, frl_percent: 92.6, total_enrollment: 887, …}
+      10: {DBN: "20K105", Name: "PS 105 THE BLYTHEBOURNE", schoolyear: 20102011, frl_percent: 92.8, total_enrollment: 1732, …}
+      11: {DBN: "20K160", Name: "PS 160 WILLIAM T. SAMPSON", schoolyear: 20102011, frl_percent: 92.9, total_enrollment: 898, …}
+      12: {DBN: "25Q024", Name: "PS 024 ANDREW JACKSON", schoolyear: 20102011, frl_percent: 82.8, total_enrollment: 832, …}
+      13: {DBN: "25Q120", Name: "PS 120 QUEENS", schoolyear: 20102011, frl_percent: 85.3, total_enrollment: 885, …}
+      14: {DBN: "25Q163", Name: "PS 163 FLUSHING HEIGHTS", schoolyear: 20102011, frl_percent: 76.9, total_enrollment: 569, …}
+      15: {DBN: "25Q242", Name: "PS 242", schoolyear: 20102011, frl_percent: 61.8, total_enrollment: 354, …}
+      16: {DBN: "25Q244", Name: "ACTIVE LEARNING ELEMENTARY SCHOOL", schoolyear: 20102011, frl_percent: 70.9, total_enrollment: 328, …}
+      17: {DBN: "26Q018", Name: "PS 018 WINCHESTER", schoolyear: 20102011, frl_percent: 50.8, total_enrollment: 502, …}
+      18: {DBN: "26Q191", Name: "PS 191 MAYFLOWER", schoolyear: 20102011, frl_percent: 46.4, total_enrollment: 372, …}
+      19: {DBN: "26Q203", Name: "PS 203 OAKLAND GARDENS", schoolyear: 20102011, frl_percent: 40.9, total_enrollment: 816, …}
+      20: {DBN: "28Q161", Name: "PS 161 ARTHUR ASHE SCHOOL", schoolyear: 20102011, frl_percent: 94.4, total_enrollment: 797, …}
+      21: {DBN: "28Q687", Name: "QUEENS HIGH SCHOOL FOR SCIENCES AT YORK COLLEGE", schoolyear: 20102011, frl_percent: 42.6, total_enrollment: 408, …}
+      22: {DBN: "29Q131", Name: "PS 131 ABIGAIL ADAMS", schoolyear: 20102011, frl_percent: 88.2, total_enrollment: 807, …}
+      length: 23
+      __proto__: Array(0)
+    </pre>
+
+    <br><br>
+    
+    <p>
+      Finally, get a list of only the names and Asian percentage of each school (in a sublist) that has an Asian percentage of over 70%.
+    </p>
+    <pre>
+      var asianDomination_names = asianDomination.map( function(n) {return [n['Name'], n['asian_per']]} );
+      console.log(asianDomination_names);
+    </pre>
+    <pre class="block">
+      0: (2) ["PS 184M SHUANG WEN", 80.6]
+      1: (2) ["LOWER EAST SIDE PREPARATORY HIGH SCHOOL", 93.7]
+      2: (2) ["PS 002 MEYER LONDON", 82.7]
+      3: (2) ["PS 042 BENJAMIN ALTMAN", 93.3]
+      4: (2) ["PS 124 YUNG WING", 92]
+      5: (2) ["PS 130 HERNANDO DESOTO", 88.4]
+      6: (2) ["I S 131", 81.1]
+      7: (2) ["STUYVESANT HIGH SCHOOL", 71.6]
+      8: (2) ["HIGH SCHOOL FOR DUAL LANGUAGE & ASIAN STUDIES", 86.4]
+      9: (2) ["PS 69", 73.7]
+      10: (2) ["PS 105 THE BLYTHEBOURNE", 90.3]
+      11: (2) ["PS 160 WILLIAM T. SAMPSON", 71.8]
+      12: (2) ["PS 024 ANDREW JACKSON", 80.3]
+      13: (2) ["PS 120 QUEENS", 79.4]
+      14: (2) ["PS 163 FLUSHING HEIGHTS", 76.8]
+      15: (2) ["PS 242", 70.3]
+      16: (2) ["ACTIVE LEARNING ELEMENTARY SCHOOL", 82.9]
+      17: (2) ["PS 018 WINCHESTER", 72.9]
+      18: (2) ["PS 191 MAYFLOWER", 71.8]
+      19: (2) ["PS 203 OAKLAND GARDENS", 71.9]
+      20: (2) ["PS 161 ARTHUR ASHE SCHOOL", 71.9]
+      21: (2) ["QUEENS HIGH SCHOOL FOR SCIENCES AT YORK COLLEGE", 71.1]
+      22: (2) ["PS 131 ABIGAIL ADAMS", 72.1]
+      length: 23
+      __proto__: Array(0)
+    </pre>
+    
+    <script src="2006_-_2012_School_Demographics_and_Accountability_Snapshot.js"></script>
+    <script src="script.js"></script>
+  </body>
+
+</html>
+
